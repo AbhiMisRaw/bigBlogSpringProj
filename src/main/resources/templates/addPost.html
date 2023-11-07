@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+  <title>BigBlog</title>
+</head>
+<body>
+<h1>Add a blog</h1>
+<div>
+
+
+  <form th:object="${post}" th:action="@{/post/save}" method="post">
+    <div>
+      <label for="title">Title</label>
+      <input id="title" th:field="*{title}" type="text">
+      <div style="color:red" th:if="${#fields.hasErrors('title')}"
+           th:errors="*{title}">Invalid Title</div>
+    </div>
+
+    <div>
+      <label for="description">Description</label>
+      <input id="description" th:field="*{description}" type="text">
+      <div style="color:red" th:if="${#fields.hasErrors('description')}"
+           th:errors="*{description}">Invalid Title</div>
+    </div>
+
+    <div>
+      <label for="body">Title</label>
+      <textarea id="body" th:field="*{body}" type="text"> </textarea>
+      <div style="color:red" th:if="${#fields.hasErrors('body')}"
+           th:errors="*{body}">Invalid Title</div>
+    </div>
+
+    <div><input type="submit"></div>
+  </form>
+</div>
+
+</body>
+</html>
