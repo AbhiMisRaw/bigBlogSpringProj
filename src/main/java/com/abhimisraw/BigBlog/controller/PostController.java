@@ -2,14 +2,17 @@ package com.abhimisraw.BigBlog.controller;
 
 import com.abhimisraw.BigBlog.domain.Post;
 import com.abhimisraw.BigBlog.service.PostService;
+import com.abhimisraw.BigBlog.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -19,10 +22,19 @@ public class PostController {
     @Autowired
     private PostService postService;
 
+
+
     @GetMapping("/add")
     public String addPost(Model model){
         model.addAttribute("post", new Post());
         return "addPost";
+    }
+
+    @GetMapping("/{title}")
+    public String getPostByTitle(@PathVariable String title , Model model){
+        model.addAttribute("post" , postService.getPostByTitle(title));
+        return "singlePost";
+
     }
 
 
@@ -41,10 +53,13 @@ public class PostController {
 
 
     @GetMapping("/all")
-    public String getAllPost(Model model){
+    public String getAllPost(Model model, Principal principal){
         //postService
+
+        String name = principal.getName();
         List<Post> posts = postService.findAllPosts();
         model.addAttribute("posts", posts);
+        model.addAttribute("name", name);
         return "posts";
     }
 

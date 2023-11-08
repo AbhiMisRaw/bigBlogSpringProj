@@ -28,8 +28,8 @@ public class WebSecurityConfig {
                 .formLogin(
                         formLogin ->
                                 formLogin.loginPage("/login")
-                                        .successForwardUrl("/post")
-                                        .defaultSuccessUrl("/post")
+                                        .successForwardUrl("/post/all")
+                                        .defaultSuccessUrl("/post/all")
                                         .failureUrl("/login?error")
                                         .permitAll()
                 )
@@ -52,7 +52,7 @@ public class WebSecurityConfig {
     public static PasswordEncoder passwordEncoder() {
 
             // Use NoOpPasswordEncoder to store passwords in plaintext
-            return new BCryptPasswordEncoder();
+            return NoOpPasswordEncoder.getInstance();
 
     }
 }

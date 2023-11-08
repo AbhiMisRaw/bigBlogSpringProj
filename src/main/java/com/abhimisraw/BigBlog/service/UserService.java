@@ -16,7 +16,7 @@ public class UserService {
 
     public void registerUser(UserForm userForm){
         User user = userForm.toUser(userForm);
-        user.setPassword(passwordEncoder.encode(userForm.getPassword()));
+        //user.setPassword(passwordEncoder.encode(userForm.getPassword()));
         userRepository.save(user);
     }
 

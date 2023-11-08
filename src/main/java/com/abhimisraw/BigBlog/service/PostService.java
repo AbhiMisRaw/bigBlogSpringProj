@@ -36,4 +36,10 @@ public class PostService {
 
         postRepository.save(post);
     }
+
+    public Optional<Post> getPostByTitle(String title) {
+        List<Post> list = findAllPosts();
+        Optional<Post> post1 = list.stream().filter(post -> post.getTitle().equals(title)).findFirst();
+        return post1;
+    }
 }

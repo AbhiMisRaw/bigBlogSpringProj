@@ -1,38 +1,63 @@
 <!DOCTYPE html>
-<html xmlns:th="http://thymeleaf.org">
+<html xmlns:th="http://thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
   <title>BigBlog</title>
 </head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 <body>
-<h1>Add a blog</h1>
-<div>
+
+<div th:include="fragments/header :: header"></div>
 
 
-  <form th:object="${post}" th:action="@{/post/save}" method="post">
-    <div>
-      <label for="title">Title</label>
-      <input id="title" th:field="*{title}" type="text">
-      <div style="color:red" th:if="${#fields.hasErrors('title')}"
-           th:errors="*{title}">Invalid Title</div>
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-2">
+
+      </div>
+      <div class="col-8">
+        <h1 class="my-auto">Add a blog</h1>
+        <br>
+        <br>
+        <div>
+          <form th:object="${post}" th:action="@{/post/save}" method="post">
+            <div class="form-group">
+              <label for="title">Title</label>
+              <input id="title" th:field="*{title}" class="form-control" type="text" placeholder="Blog's Title">
+              <div style="color:red" th:if="${#fields.hasErrors('title')}"
+                   th:errors="*{title}">Invalid Title</div>
+            </div>
+
+            <div class="form-group">
+              <label for="description">Description</label>
+              <input id="description" th:field="*{description}" class="form-control" type="text" placeholder="Description about blog">
+              <div style="color:red" th:if="${#fields.hasErrors('description')}"
+                   th:errors="*{description}">Invalid Title</div>
+            </div>
+
+            <div class="form-group">
+              <label for="body">Write your blog here</label>
+              <textarea id="body" th:field="*{body}" class="form-control" type="text"> </textarea>
+              <div style="color:red" th:if="${#fields.hasErrors('body')}"
+                   th:errors="*{body}">Invalid Title</div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+
+        </div>
+      </div>
+      <div class="col-2">
+
+      </div>
     </div>
+  </div>
 
-    <div>
-      <label for="description">Description</label>
-      <input id="description" th:field="*{description}" type="text">
-      <div style="color:red" th:if="${#fields.hasErrors('description')}"
-           th:errors="*{description}">Invalid Title</div>
-    </div>
 
-    <div>
-      <label for="body">Title</label>
-      <textarea id="body" th:field="*{body}" type="text"> </textarea>
-      <div style="color:red" th:if="${#fields.hasErrors('body')}"
-           th:errors="*{body}">Invalid Title</div>
-    </div>
 
-    <div><input type="submit"></div>
-  </form>
-</div>
+<div th:include="fragments/footer :: footer"></div>
 
 </body>
 </html>
